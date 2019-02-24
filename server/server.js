@@ -10,8 +10,6 @@ const {Todo} = require('./models/todo');
 const {User} = require('./models/user');
 const {authenticate} = require('./middleware/authenticate');
 
-mongoose.set('useFindAndModify', false);
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -23,7 +21,7 @@ app.post('/todos', (req, res) => {
     });
 
     todo.save().then((doc) => {
-        res.send(doc);
+        res.status(201).send(doc);
     }, (e) => {
         res.status(400).send(e);
     });
